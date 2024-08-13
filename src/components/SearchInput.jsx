@@ -9,12 +9,15 @@ import ImageIcon from "../assets/image.svg";
 const SearchInput = () => {
 
     const { query } = useParams();
+    // here query is after / from url when we enter for our result than where is the searchQuery used it shows the text of query instead of "" in searchresult.
     // hooks are being used to define variable in the react js
     const [searchQuery, setSearchQuery] = useState(query || "");
     const navigate = useNavigate();
 
     const searchQueryHandler = (event) => {
         if (event?.key === "Enter" && searchQuery?.length > 0) {
+
+            //startindex is always 1.
             navigate(`/${searchQuery}/${1}`);
         }
     };

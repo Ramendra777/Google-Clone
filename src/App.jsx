@@ -11,7 +11,7 @@ function App() {
                 {/* Routes take props one is the path and other exact meaning he default route which is the first page. */}
                 {/* element props used to tell which page is componenet is currently running. */}
                 <Route path = "/" exact element = {<Home/>} />
-                <Route path = "/" exact element = {<SearchResult/>} />
+                <Route path = "/:query/:startIndex" exact element = {<SearchResult/>} />
             </Routes>
         </BrowserRouter>
     );
