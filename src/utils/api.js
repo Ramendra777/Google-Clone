@@ -7,8 +7,8 @@ import axios from "axios";
 const BASE_URL = "https://www.googleapis.com/customsearch/v1";
 
 const params = {
-    key: "AIzaSyDhxBORdogQz92F9HDoI84J4454W2qht40", // Ensure correct environment variable naming
-    cx: "e5a60857b049c47d4",
+    key: "YOUR_API_KEY", // Ensure correct environment variable naming
+    cx: "YOUR_CX_KEY",
 };
 
 export const fetchDataFromApi = async (payload) => {
