@@ -9,10 +9,27 @@ import { menu } from "../utils/Constants";
 
 const SearchResultHeader = () => {
     
+    const [selectMenu, setselectMenu] = useState("All");
+    const {setImageSearch} = useContext(Context);
+    
+    // basically use effect convert the setImageSearch to false during loading. 
+    useEffect(() => {
+        return () => setImageSearch(false);
+    }, []);
+
+    const clickHandler  = (menuItem) => {
+       let isTypeImage = menuItem.name === "Images";
+        // here we updated the state.
+       setselectMenu(menuItem.name);
+        // if name is images than setImageSearch turns to true and it remains true that's why we use useEffect hook to change it to false.
+       setImageSearch(isTypeImage ? true : false);
+    }
+
     return (
         <div className="p-[15px] pb-0 md:pr-5 md:pl-20 md:pt-7 border-b border-[#ebebeb] flex md:block flex-col items-center sticky top-0 bg-white">
             <div className="flex items-center justify-between w-full">
                 <div className="flex items-center grow">
+                    {/* this link is just like anchor tag and to like href */}
                     <Link to="/">
                         <img
                             className="hidden md:block w-[92px] mr-10"
@@ -31,7 +48,9 @@ const SearchResultHeader = () => {
                 {menu.map((menu, index) => (
                     <span
                         key={index}
-                        className={`flex items-center p-3 text-[#5f6368] cursor-pointer relative }`}
+                        className={`flex items-center p-3 text-[#5f6368] cursor-pointer relative 
+                           ${selectMenu === menu.name ? "text-[#1a73e8]" : "" } 
+                        }`}
                         onClick={() => clickHandler(menu)}
                     >   
                     {/* in case of mobile view the menu icon is getting being hidden but the name will show only. */}
@@ -39,7 +58,11 @@ const SearchResultHeader = () => {
                             {menu.icon}
                         </span>
                         <span className="text-sm">{menu.name}</span>
-            
+                        {selectMenu === menu.name && (
+                            // using self closing tag
+                            <span className="h-[3px] w-[calc(100%-20px)] absolute bg-[#1a73e8] bottom-0 left-[10px]" />
+                        )}
+                        {/* if we have to make things start from there corner we use relative and absolute. */}
                     </span>
                 ))}
             </div>
